@@ -9,7 +9,10 @@
   <div *ngIf="cartItems.length > 0; else emptyCart">
     <h4 class="text-end">Total: ${{ total | number: "1.2-2" }}</h4>
     <div class="card mb-3" *ngFor="let item of cartItems; let i = index">
-      <div class="row g-0 align-items-center">
+      <div
+        class="row g-0 align-items-center"
+        routerLink="/details/{{ item.id }}"
+      >
         <div class="col-md-2">
           <img [src]="item.image" class="img-fluid" />
         </div>
