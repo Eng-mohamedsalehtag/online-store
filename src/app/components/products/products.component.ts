@@ -10,6 +10,7 @@ import { ProductsService } from 'src/app/services/products.service';
 export class ProductsComponent {
   products: any[] = [];
   categories: any[] = [];
+  loading: boolean = false;
   constructor(
     private productsService: ProductsService,
     private categoriesService: CategoriesService,
@@ -20,15 +21,19 @@ export class ProductsComponent {
     this.getCategories();
   }
   getProducts() {
+    this.loading = true;
     this.productsService.getProducts().subscribe((data: any) => {
       console.log(data);
       this.products = data;
+      this.loading = false;
     });
   }
   getCategories() {
+    this.loading = true;
     this.categoriesService.getCategories().subscribe((data: any) => {
       console.log(data);
       this.categories = data;
+      this.loading = false;
     });
   }
   getfilteredProducts(event: any) {
@@ -40,11 +45,25 @@ export class ProductsComponent {
     }
   }
   getCategoryProducts(category: string) {
+    this.loading = true;
     this.categoriesService
       .getCategoryProducts(category)
       .subscribe((data: any) => {
         console.log(data);
         this.products = data;
+        this.loading = false;
       });
+  }
+  //add to cart
+  addToCart(product: any) {
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    let existingProduct = cart.find((p: any) => p.id === product.id);
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('Product added to cart!');
   }
 }

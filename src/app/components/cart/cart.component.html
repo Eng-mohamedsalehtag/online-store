@@ -1,1 +1,52 @@
-<p>cart works!</p>
+<div class="container mt-4">
+  <h2 class="mb-4 text-center">Your Cart 🛒</h2>
+  <button class="btn btn-danger ms-auto" (click)="clearCart()">
+    Clear Cart
+  </button>
+
+  <div *ngIf="cartItems.length > 0; else emptyCart">
+    <h4 class="text-end">Total: ${{ total | number: "1.2-2" }}</h4>
+    <div class="card mb-3" *ngFor="let item of cartItems; let i = index">
+      <div class="row g-0 align-items-center">
+        <div class="col-md-2">
+          <img [src]="item.image" class="img-fluid" />
+        </div>
+
+        <div class="col-md-4">
+          <h5>{{ item.title }}</h5>
+          <p>${{ item.price }}</p>
+        </div>
+
+        <div class="col-md-3 d-flex align-items-center">
+          <button
+            class="btn btn-sm btn-danger"
+            (click)="decreaseQuantity(item)"
+          >
+            -
+          </button>
+          <span class="mx-2">{{ item.quantity }}</span>
+          <button
+            class="btn btn-sm btn-success"
+            (click)="increaseQuantity(item)"
+          >
+            +
+          </button>
+        </div>
+
+        <div class="col-md-2">
+          <strong>${{ item.price * item.quantity }}</strong>
+        </div>
+
+        <div class="col-md-1">
+          <button class="btn btn-danger btn-sm" (click)="removeItem(i)">
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <p class="text-center fs-4 h-100 w-100">Your cart is empty 😢</p>
+  </ng-template>
+</div>

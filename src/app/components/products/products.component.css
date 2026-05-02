@@ -1,5 +1,6 @@
 /* styles for the products component and animation cards */
 .card {
+  cursor: pointer;
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
