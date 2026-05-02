@@ -10,3 +10,31 @@
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.card-text {
+  color: #666;
+  flex-grow: 1;
+}
+
+.card-img-top {
+  transition: transform 0.3s;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.btn-success {
+  background: linear-gradient(45deg, #28a745, #20c997);
+  border: none;
+}
+
+.form-select {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

@@ -8,12 +8,11 @@
       <h2>{{ product.title }}</h2>
       <h3>{{ product.category }}</h3>
       <p>{{ product.description }}</p>
-      <p>rating: {{ product.rating.rate }}</p>
-      <p>count: {{ product.rating.count }}</p>
+      <p class="rating"><i class="fas fa-star"></i>Rating: {{ product.rating.rate }} ({{ product.rating.count }} reviews)</p>
       <h4>${{ product.price }}</h4>
 
       <button class="btn btn-success" (click)="addToCart(product)">
-        Add to Cart
+        <i class="fas fa-cart-plus me-1"></i>Add to Cart
       </button>
     </div>
   </div>

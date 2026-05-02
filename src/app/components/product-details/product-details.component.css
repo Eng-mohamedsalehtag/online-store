@@ -1,0 +1,38 @@
+.container {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  color: #666;
+  font-weight: 300;
+}
+
+h4 {
+  color: #28a745;
+  font-size: 1.5rem;
+}
+
+.btn-success {
+  background: linear-gradient(45deg, #28a745, #20c997);
+  border: none;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.rating i {
+  color: #ffc107;
+  margin-right: 0.5rem;
+}
