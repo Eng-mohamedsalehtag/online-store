@@ -9,11 +9,8 @@
   <div *ngIf="cartItems.length > 0; else emptyCart">
     <h4 class="text-end">Total: ${{ total | number: "1.2-2" }}</h4>
     <div class="card mb-3" *ngFor="let item of cartItems; let i = index">
-      <div
-        class="row g-0 align-items-center"
-        routerLink="/details/{{ item.id }}"
-      >
-        <div class="col-md-2">
+      <div class="row g-0 align-items-center">
+        <div class="col-md-2" routerLink="/details/{{ item.id }}">
           <img [src]="item.image" class="img-fluid" />
         </div>
 
@@ -49,6 +46,9 @@
         </div>
       </div>
     </div>
+    <button class="btn btn-success w-100" (click)="placeOrder()">
+      Order Now
+    </button>
   </div>
 
   <ng-template #emptyCart>
@@ -56,4 +56,7 @@
       <i class="fas fa-shopping-cart text-muted me-2"></i>Your cart is empty
     </p>
   </ng-template>
+  <div class="alert alert-success m-2" *ngIf="success">
+    Order placed successfully
+  </div>
 </div>

@@ -27,6 +27,7 @@ h5 {
 }
 
 .img-fluid {
+  cursor: pointer;
   max-height: 100px;
   object-fit: cover;
 }

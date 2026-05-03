@@ -9,7 +9,8 @@ import { CartService } from 'src/app/services/cart.service';
 export class CartComponent {
   cartItems: any[] = [];
   total: number = 0;
-
+  success: boolean = false;
+  constructor(private cartService: CartService) {}
   ngOnInit(): void {
     this.loadCart();
   }
@@ -54,5 +55,26 @@ export class CartComponent {
   updateCart() {
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
     this.getTotal();
+  }
+  placeOrder() {
+    const order = {
+      userId: 1, // Example user ID
+      date: new Date(),
+      products: this.cartItems.map((item) => ({
+        productId: item.id,
+        quantity: item.quantity,
+      })),
+    };
+
+    this.cartService.createCart(order).subscribe(
+      (response) => {
+        console.log('Order placed successfully:', response);
+        this.success = true;
+        this.clearCart();
+      },
+      (error) => {
+        console.error('Error placing order:', error);
+      },
+    );
   }
 }
