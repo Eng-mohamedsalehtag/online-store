@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-details',
@@ -15,6 +16,7 @@ export class ProductDetailsComponent {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductsService,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,6 @@ export class ProductDetailsComponent {
       cart.push({ ...product, quantity: 1 });
     }
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert('Product added to cart!');
+    this.toastr.success('Product added to cart 🛒', 'Success');
   }
 }

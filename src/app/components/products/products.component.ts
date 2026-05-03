@@ -1,19 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   products: any[] = [];
   categories: any[] = [];
   loading: boolean = false;
   constructor(
     private productsService: ProductsService,
     private categoriesService: CategoriesService,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit() {
@@ -64,6 +66,6 @@ export class ProductsComponent {
       cart.push({ ...product, quantity: 1 });
     }
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert('Product added to cart!');
+    this.toastr.success('Product added to cart 🛒', 'Success');
   }
 }
