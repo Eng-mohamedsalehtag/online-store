@@ -10,6 +10,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     NavbarComponent,
     FooterComponent,
     SpinnerComponent,
+    HomeComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
