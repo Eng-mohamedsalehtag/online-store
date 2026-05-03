@@ -1,27 +1,111 @@
-# OnlineStore
+# Online Store
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+Online Store is an Angular e-commerce web application for browsing products, viewing product details, filtering by category, and managing a shopping cart.
 
-## Development server
+The app uses the [Fake Store API](https://fakestoreapi.com/) for product and category data, Bootstrap for responsive layout, and Font Awesome for icons.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- Home page with hero section, featured products, categories, and call-to-action area.
+- Products page that lists all products from the API.
+- Category filter for browsing products by product type.
+- Product details page with image, category, description, rating, reviews count, and price.
+- Add-to-cart functionality from the products page and product details page.
+- Cart page with saved cart items, quantity controls, item removal, clear cart, and total price calculation.
+- Cart data is stored in browser `localStorage`.
+- Loading spinner while product and category data is being fetched.
+- Shared navbar and footer across the application.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Technologies Used
 
-## Build
+- Angular 16
+- TypeScript
+- Bootstrap 5
+- Font Awesome
+- RxJS
+- Fake Store API
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Project Structure
 
-## Running unit tests
+```text
+src/app
+|-- components
+|   |-- home
+|   |-- products
+|   |-- product-details
+|   `-- cart
+|-- services
+|   |-- products.service.ts
+|   |-- categories.service.ts
+|   `-- cart.service.ts
+|-- shared
+|   |-- navbar
+|   |-- footer
+|   `-- spinner
+|-- app-routing.module.ts
+`-- app.module.ts
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Routes
 
-## Running end-to-end tests
+| Route | Page |
+| --- | --- |
+| `/home` | Home page |
+| `/products` | Product listing and category filtering |
+| `/details/:id` | Product details |
+| `/cart` | Shopping cart |
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Getting Started
 
-## Further help
+Install dependencies:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm start
+```
+
+Open the app in your browser:
+
+```text
+http://localhost:4200/
+```
+
+The app reloads automatically when source files change.
+
+## Available Scripts
+
+```bash
+npm start
+```
+
+Starts the Angular development server.
+
+```bash
+npm run build
+```
+
+Builds the project into the `dist/` directory.
+
+```bash
+npm test
+```
+
+Runs unit tests with Karma.
+
+## API
+
+This project gets data from Fake Store API:
+
+- Products: `https://fakestoreapi.com/products`
+- Product details: `https://fakestoreapi.com/products/{id}`
+- Categories: `https://fakestoreapi.com/products/categories`
+- Category products: `https://fakestoreapi.com/products/category/{category}`
+
+## Notes
+
+This project was generated with Angular CLI version 16.2.16 and developed as a course e-commerce practice project.
