@@ -25,7 +25,8 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="cart" routerLinkActive="active"
-            ><i class="fas fa-shopping-cart me-1"></i>Cart</a
+            ><i class="fas fa-shopping-cart me-1"></i>Cart
+            <span class="badge bg-danger ms-1" *ngIf="cartCount > 0">{{ cartCount }}</span></a
           >
         </li>
       </ul>

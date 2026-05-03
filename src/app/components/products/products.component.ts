@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { ToastrService } from 'ngx-toastr';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -16,6 +17,7 @@ export class ProductsComponent implements OnInit {
     private productsService: ProductsService,
     private categoriesService: CategoriesService,
     private toastr: ToastrService,
+    private cartService: CartService,
   ) {}
 
   ngOnInit() {
@@ -58,14 +60,7 @@ export class ProductsComponent implements OnInit {
   }
   //add to cart
   addToCart(product: any) {
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    let existingProduct = cart.find((p: any) => p.id === product.id);
-    if (existingProduct) {
-      existingProduct.quantity += 1;
-    } else {
-      cart.push({ ...product, quantity: 1 });
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
+    this.cartService.addToCart(product);
     this.toastr.success('Product added to cart 🛒', 'Success');
   }
 }

@@ -1,23 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
-export class CartComponent {
+export class CartComponent implements OnInit, OnDestroy {
   cartItems: any[] = [];
   total: number = 0;
   success: boolean = false;
+  private cartSubscription: Subscription = new Subscription();
+
   constructor(private cartService: CartService) {}
+
   ngOnInit(): void {
-    this.loadCart();
+    this.cartSubscription = this.cartService.cart$.subscribe((cart) => {
+      this.cartItems = cart;
+      this.getTotal();
+    });
   }
 
-  loadCart() {
-    this.cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
-    this.getTotal();
+  ngOnDestroy(): void {
+    this.cartSubscription.unsubscribe();
   }
 
   getTotal() {
@@ -26,30 +32,24 @@ export class CartComponent {
     }, 0);
   }
 
-  removeItem(index: number) {
-    this.cartItems.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(this.cartItems));
-    this.getTotal();
+  removeItem(productId: number) {
+    this.cartService.removeFromCart(productId);
   }
 
   clearCart() {
-    this.cartItems = [];
-    localStorage.removeItem('cart');
-    this.getTotal();
+    this.cartService.clearCart();
   }
 
   increaseQuantity(item: any) {
-    item.quantity++;
-    this.updateCart();
+    this.cartService.updateQuantity(item.id, item.quantity + 1);
   }
 
   decreaseQuantity(item: any) {
     if (item.quantity > 1) {
-      item.quantity--;
+      this.cartService.updateQuantity(item.id, item.quantity - 1);
     } else {
-      this.removeItem(this.cartItems.indexOf(item));
+      this.cartService.removeFromCart(item.id);
     }
-    this.updateCart();
   }
 
   updateCart() {
@@ -67,12 +67,12 @@ export class CartComponent {
     };
 
     this.cartService.createCart(order).subscribe(
-      (response) => {
+      (response: any) => {
         console.log('Order placed successfully:', response);
         this.success = true;
         this.clearCart();
       },
-      (error) => {
+      (error: any) => {
         console.error('Error placing order:', error);
       },
     );
